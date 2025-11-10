@@ -5,17 +5,17 @@ import "../style.css"
 
 const Bot_chatcontainer_ = () => {
   const [text, setText] = useState("");
-  const [messages, setMessages] = useState([]); // State to store chat messages
+  const [messages, setMessages] = useState([]); // State  to store chat messages
   const [botTyping, setBotTyping] = useState(false); // Track bot typing status
   const [emojiPickerVisible, setEmojiPickerVisible] = useState(false); // Control emoji picker visibility
   const inputRef = useRef(null);
   const messageEndRef = useRef(null);
-  const API_KEY = "AIzaSyAVr8tAVFQZpGlKTXVh5Cty7x8FIIQnsRw";
+  const API_KEY = "AIzaSyAuPPWAChsL1kdLZ4NUOyfRqG7TeglkVmU";
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
   const handleOutgoingMessage = async (e) => {
     e.preventDefault();
-
+  
     const userMessage = text.trim();
     if (!userMessage) return;
 
