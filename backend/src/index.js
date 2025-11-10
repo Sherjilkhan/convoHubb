@@ -15,17 +15,27 @@ app.use(express.json({limit:'100mb'}));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
-const allowedOrigin = process.env.NODE_ENV === 'production' 
-    ? 'https://convohub-pby8.onrender.com' // Replace with your actual deployed URL
-    : 'http://localhost:5173';
+const allowedOrigins = [
+    'http://localhost:5173', // Local Dev
+    'https://convohub-pby8.onrender.com', // Your Backend itself
+    'https://fascinating-lokum-830c71.netlify.app', // Your Netlify site
+    // You can also add your custom domain if you use one
+];
 
 app.use(
   cors({
-    origin: allowedOrigin,
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true); 
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'), false);
+        }
+    },
     credentials: true,
   })
 );
-
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 

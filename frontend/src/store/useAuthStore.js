@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = "convo-hubb-fyvvlwg7g-sherjils-projects.vercel.app";
+const BASE_URL = "https://convohub-pby8.onrender.com/api";  
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
